@@ -13,6 +13,7 @@ class App extends Component {
       imageUrl: null, // to store uploaded image path
       invalidImage: null // handle the message of the image validation
     };
+    this.reader = new FileReader();
   }
 
   // handle change event of input file and validate it
@@ -29,8 +30,7 @@ class App extends Component {
       return false;
     }
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
+    this.reader.onload = (e) => {
       const img = new Image();
       img.onload = () => {
         this.setState({ selectedFile: imageFile, invalidImage: null });
@@ -41,7 +41,7 @@ class App extends Component {
       };
       img.src = e.target.result;
     };
-    reader.readAsDataURL(imageFile);
+    this.reader.readAsDataURL(imageFile);
   }
 
   // handle click event of the upload button
